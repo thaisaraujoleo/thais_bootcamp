@@ -1,1 +1,24 @@
-Bem-vindo!
+<h1>Estamos na home</h1>
+
+<% if user_signed_in? %>
+	Olá <%= current_user.email %>
+	<hr>
+	<hr2>Lista de Tweets</hr2>
+
+	<%= form_for @tweet do |f| %>
+	  <%= f.text_field :content %>
+	  <%= f.submit %>
+	  <% end %>
+
+	<% current_user.tweets.each do |tweet| %>
+		<li><%= tweet.content %></li>
+	<% end %>
+
+	<br>
+<%= link_to 'Sair' , destroy_user_session_path, method: :delete %>
+
+<% else %>
+<%= link_to 'Clique aqui para logar', new_user_session_path %>
+<% end %>
+
+
