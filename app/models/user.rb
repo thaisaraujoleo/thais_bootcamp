@@ -29,7 +29,12 @@ class User < ApplicationRecord
 
   def unfollow!(other_user)
     #Este método apagará o relacionamento entre um usuário e outro.
-    following.destroy(other_user
+    following.destroy(other_user)
+  end
+  def feed
+    #Este metódo irá gerar o feed para o usuário
+    users_ids = following.pluck(:id)
+    Tweet.where(user_id: users_ids).order(created_at: :desc)
   end
 
 end
